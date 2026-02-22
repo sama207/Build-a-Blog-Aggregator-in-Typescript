@@ -1,0 +1,27 @@
+{
+  "name": "build_a_blog_aggregator_in_typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sama207/Build-a-Blog-Aggregator-in-Typescript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sama207/Build-a-Blog-Aggregator-in-Typescript/issues"
+  },
+  "homepage": "https://github.com/sama207/Build-a-Blog-Aggregator-in-Typescript#readme",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "type": "module"
+}
