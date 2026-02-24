@@ -2,10 +2,7 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 
-export type Config = {
-    dbUrl: string,
-    currentUserName?: string
-}
+import {Config} from "./Types/Config.js";
 
 export function setUser(userName: string): void {
     var cfg = readConfig();
@@ -13,6 +10,7 @@ export function setUser(userName: string): void {
         dbUrl: cfg.dbUrl,
         currentUserName: userName
     });
+
 }
 
 export function readConfig(): Config {
@@ -21,7 +19,7 @@ export function readConfig(): Config {
 
     if (fs.existsSync(configPath)) {
         const data = fs.readFileSync(configPath, "utf-8");
-        console.log(`Config file content: ${data}`);
+        // console.log(`initial Config file content: ${data}`);
         return validateConfig(JSON.parse(data));
     }
     else {
@@ -29,7 +27,7 @@ export function readConfig(): Config {
     }
 }
 
-function getConfigFilePath(): string {
+export function getConfigFilePath(): string {
     return path.join(os.homedir(), ".gatorconfig.json");
 }
 

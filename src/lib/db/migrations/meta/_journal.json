@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1771789370860,
+      "tag": "0000_chemical_menace",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1771858532070,
+      "tag": "0001_special_smiling_tiger",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1771936726221,
+      "tag": "0002_true_sleepwalker",
+      "breakpoints": true
+    }
+  ]
+}
