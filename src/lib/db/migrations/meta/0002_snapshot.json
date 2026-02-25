@@ -1,9 +1,91 @@
 {
-  "id": "d64e6d0c-1433-4d91-8f9a-84590e74f1b8",
-  "prevId": "b3cd9d8d-28e1-465b-b330-695abbb3bd08",
+  "id": "83a8586b-2645-4717-85cc-3be93150666f",
+  "prevId": "4b01cc79-614a-44bf-858a-028b302f182a",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.feed_follows": {
+      "name": "feed_follows",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "feed_id": {
+          "name": "feed_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "feed_follows_user_id_users_id_fk": {
+          "name": "feed_follows_user_id_users_id_fk",
+          "tableFrom": "feed_follows",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "feed_follows_feed_id_feeds_id_fk": {
+          "name": "feed_follows_feed_id_feeds_id_fk",
+          "tableFrom": "feed_follows",
+          "tableTo": "feeds",
+          "columnsFrom": [
+            "feed_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "feed_follows_user_id_feed_id_unique": {
+          "name": "feed_follows_user_id_feed_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "user_id",
+            "feed_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.feeds": {
       "name": "feeds",
       "schema": "",

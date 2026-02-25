@@ -2,14 +2,13 @@ import { eq } from "drizzle-orm";
 import { db } from "..";
 import { users } from "../schema.js";
 import { readConfig } from "../../../config.js";
-import { UUID } from "node:crypto";
 
 export async function createUser(name: string) {
     const [result] = await db.insert(users).values({ name: name }).onConflictDoNothing({ target: users.name }).returning();
     return result;
 }
 
-export async function getUser(name: string) {
+export async function getUserByName(name: string) {
     const [result] = await db.select().from(users).where(eq(users.name, name));
     return result;
 }
@@ -22,7 +21,7 @@ export async function getUsers() {
 export async function loggedInUser() {
     const config = await readConfig();
     if (config.currentUserName !== undefined) {
-        return await getUser(config.currentUserName);
+        return await getUserByName(config.currentUserName);
     } else {
         throw new Error("No user logged in. Please log in to perform this action.");
     }

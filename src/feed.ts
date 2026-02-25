@@ -1,5 +1,5 @@
 import { XMLParser } from "fast-xml-parser";
-import { Feed, User } from "./Types/schema_objs.js"
+import { Feed, User } from "./Types/Schema_objs.js"
 export async function fetchFeed(feedURL: string) {
 
     const XMLdata = await fetch(feedURL, {
@@ -62,10 +62,6 @@ export async function fetchFeed(feedURL: string) {
 
 export function printFeed(feeds: Feed, user: User) {
     if (feeds !== undefined && user !== undefined) {
-        console.log(`\n${user.name}'s Feeds:`);
-        console.log(`\nFeed created successfully!`);
-        console.log(`\nname: ${feeds.name}`);
-        console.log(`\nurl: ${feeds.url}`);
-
+        console.log(`\nFeed ${feeds.name}(${feeds.url}) created successfully by ${user.name}`);
     }
 }

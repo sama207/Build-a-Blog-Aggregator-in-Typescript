@@ -5,22 +5,36 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1771789370860,
-      "tag": "0000_chemical_menace",
+      "when": 1771964715197,
+      "tag": "0000_far_true_believers",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1771858532070,
-      "tag": "0001_special_smiling_tiger",
+      "when": 1772043154149,
+      "tag": "0001_puzzling_patriot",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1771936726221,
-      "tag": "0002_true_sleepwalker",
+      "when": 1772043199945,
+      "tag": "0002_noisy_captain_america",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1772046806542,
+      "tag": "0003_new_baron_strucker",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1772046866317,
+      "tag": "0004_stormy_rumiko_fujikawa",
       "breakpoints": true
     }
   ]

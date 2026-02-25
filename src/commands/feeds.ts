@@ -10,7 +10,7 @@ export async function handlerFeeds(cmdName: string, ...args: string[]) {
         for (const f of feed) {
             const user = await getUserByID(f.userId);
             if (user !== undefined) {
-                console.log(`- ${f.name}`);
+                console.log(`- ${f.name}(${f.url})`);
                 console.log(`- ${user.name}`);
                 console.log("-------------------------");
             }

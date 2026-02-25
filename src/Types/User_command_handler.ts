@@ -1,0 +1,6 @@
+import {User} from "./Schema_objs.js"
+export type UserCommandHandler = (
+  cmdName: string,
+  user: User,
+  ...args: string[]
+) => Promise<void>;

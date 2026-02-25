@@ -1,11 +1,11 @@
 {
-  "id": "b3cd9d8d-28e1-465b-b330-695abbb3bd08",
-  "prevId": "6dad4d25-2d70-4433-9d7a-fcf830acc455",
+  "id": "4b01cc79-614a-44bf-858a-028b302f182a",
+  "prevId": "084892e2-f6d4-4ee2-ac19-25e403b92e96",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.feeds": {
-      "name": "feeds",
+    "public.feed_follows": {
+      "name": "feed_follows",
       "schema": "",
       "columns": {
         "id": {
@@ -29,17 +29,98 @@
           "notNull": true,
           "default": "now()"
         },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "feed_id": {
+          "name": "feed_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "feed_follows_user_id_users_id_fk": {
+          "name": "feed_follows_user_id_users_id_fk",
+          "tableFrom": "feed_follows",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "feed_follows_feed_id_feeds_id_fk": {
+          "name": "feed_follows_feed_id_feeds_id_fk",
+          "tableFrom": "feed_follows",
+          "tableTo": "feeds",
+          "columnsFrom": [
+            "feed_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "feed_follows_user_id_feed_id_unique": {
+          "name": "feed_follows_user_id_feed_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "user_id",
+            "feed_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.feeds": {
+      "name": "feeds",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
+        },
         "name": {
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "url": {
           "name": "url",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "user_id": {
           "name": "user_id",
@@ -66,13 +147,6 @@
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "feeds_name_unique": {
-          "name": "feeds_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        },
         "feeds_url_unique": {
           "name": "feeds_url_unique",
           "nullsNotDistinct": false,

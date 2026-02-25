@@ -9,8 +9,7 @@ export async function handlerRegister(cmdName: string, userName: string): Promis
             setUser(userName);
             console.log(`User ${userName} registered successfully!`);
         } else {
-            console.log(`Register failed: user already exists with name ${userName}.`);
-            process.exit(1);
+            throw new Error(`Register failed: user already exists with name ${userName}.`);
         }
     } else {
         throw new Error("Username must be at least 3 characters long.");

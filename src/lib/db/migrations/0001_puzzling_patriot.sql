@@ -1,0 +1,1 @@
+ALTER TABLE "feeds" ALTER COLUMN "updated_at" DROP DEFAULT;
