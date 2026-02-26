@@ -3,7 +3,7 @@ import { db } from "..";
 import { feeds, feedFollows, users } from "../schema.js";
 import { getUserByName } from "./users.js";
 import { fetchFeed } from "../../../feed.js";
-
+import { createPost } from "../queries/posts.js"
 export async function createFeed(userName: string, feedUrl: string, feedTitle: string) {
     const userId = await getUserByName(userName);
     const [createFeed] = await db.insert(feeds).values({ userId: userId["id"], url: feedUrl, name: feedTitle }).returning();
@@ -45,7 +45,7 @@ export async function createFeedFollow(feedId: string, userId: string) {
 
 }
 export async function getFeedFollowsForUser(userId: string) {
-    const res = await db.select({ userName: users.name, feedName: feeds.name })
+    const res = await db.select({ userName: users.name, feedName: feeds.name, feedUrl: feeds.url, feedId: feeds.id })
         .from(feedFollows)
         .innerJoin(feeds, eq(feedFollows.feedId, feeds.id))
         .innerJoin(users, eq(feedFollows.userId, users.id))
@@ -55,8 +55,9 @@ export async function getFeedFollowsForUser(userId: string) {
         for (const f of res) {
             console.log(f);
         }
+        return res;
     } else {
-        throw new Error("res is undefined")
+        throw new Error("res is undefined");
     }
 }
 
@@ -80,20 +81,26 @@ export async function markFeedFetched(feedId: string) {
 }
 
 export async function getNextFeedToFetch() {
-    return await db.select().from(feeds).orderBy(feeds.lastFetchedAt, sql`nulls first`).limit(1)
+    return await db.select().from(feeds).orderBy(sql`${feeds.lastFetchedAt} ASC NULLS FIRST`).limit(1)
 }
 
 export async function scrapeFeeds() {
     const feedToFetch = await getNextFeedToFetch()
     const feedId = feedToFetch[0]["id"]
-    await markFeedFetched(feedId);
+    if (feedId == null || feedId == undefined) {
+        console.log("No feeds to fetch")
+        return
+    }
     const rss = await fetchFeed(feedToFetch[0].url);
 
     if (rss != undefined) {
+        await markFeedFetched(feedId);
         var count: number = 0;
-        for (const feedInfo of rss["channel"]["item"]) {
-            console.log("items in feed : ")
+        console.log("items in feed : ")
+        for (const feedInfo of rss.channel.item) {
             console.log(`${count}- ${feedInfo.title}`)
+            await createPost(feedInfo, feedId)
+            count++
         }
     }
 }

@@ -12,6 +12,7 @@ import { handlerFeeds } from "./commands/feeds.js";
 import { handlerFollow } from "./commands/follow.js";
 import { handlerFollowing } from "./commands/following.js";
 import { handlerUnfollow } from "./commands/unFollow.js";
+import { handlerBrowse } from "./commands/browse .js";
 import { middlewareLoggedIn } from "./middleware/middleware_logged_in.js";
 
 async function main() {
@@ -28,6 +29,7 @@ async function main() {
   registerCommand(registery, "follow", middlewareLoggedIn(handlerFollow));
   registerCommand(registery, "following", middlewareLoggedIn(handlerFollowing));
   registerCommand(registery, "unfollow", middlewareLoggedIn(handlerUnfollow));
+  registerCommand(registery, "browse", middlewareLoggedIn(handlerBrowse));
 
   // print process.argv
   if (argv.length < 3) {

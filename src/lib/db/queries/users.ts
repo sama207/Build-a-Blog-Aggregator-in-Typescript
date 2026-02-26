@@ -4,7 +4,8 @@ import { users } from "../schema.js";
 import { readConfig } from "../../../config.js";
 
 export async function createUser(name: string) {
-    const [result] = await db.insert(users).values({ name: name }).onConflictDoNothing({ target: users.name }).returning();
+    const [result] = await db.insert(users)
+        .values({ name: name }).onConflictDoNothing({ target: users.name }).returning();
     return result;
 }
 

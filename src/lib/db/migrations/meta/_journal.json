@@ -36,6 +36,27 @@
       "when": 1772046866317,
       "tag": "0004_stormy_rumiko_fujikawa",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1772119004800,
+      "tag": "0005_aromatic_living_mummy",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1772119102652,
+      "tag": "0006_futuristic_sersi",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1772119477001,
+      "tag": "0007_deep_moon_knight",
+      "breakpoints": true
     }
   ]
 }
